@@ -8,6 +8,7 @@ defmodule Discuss.AuthController do
     user_params = %{
       token: auth.credentials.token,
       email: auth.info.email,
+      username: auth.info.nickname,
       provider: "github",
     }
 
@@ -37,7 +38,7 @@ defmodule Discuss.AuthController do
   end
 
   defp insert_or_update_user(changeset) do
-    case Repo.get_by(User, email: changeset.changes.email) do
+    case Repo.get_by(User, username: changeset.changes.username) do
       nil ->
         Repo.insert(changeset)
       user ->

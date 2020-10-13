@@ -20,7 +20,6 @@ defmodule Discuss.TopicController do
   ]
 
   def index(conn, _params) do
-    IO.inspect(conn.assigns)
     topics = Repo.all(Topic)
     render conn, "index.html", topics: topics
   end
